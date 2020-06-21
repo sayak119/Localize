@@ -1,0 +1,229 @@
+<html>
+
+<head>
+    <title>Order List</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="javascript/n_v_timeslot.js"></script> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <style>
+        div.col-sm-8 {
+            background-color: white;
+            width: 100px;
+            height: 250px;
+            overflow: auto;
+        }
+
+        .fullclosebutton,
+        .fullacceptbutton {
+            display: block;
+            width: 100%;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 28px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .fullclosebutton:hover,
+        .fullacceptbutton:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+
+        div {
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
+
+        .btn-light:hover {
+            background-color: lavender;
+        }
+
+        .btn-light.active,
+        .btn-light:active {
+            background-color: #111111;
+            border-color: red;
+        }
+
+        ul,
+        #myUL {
+            list-style-type: none;
+        }
+
+        #myUL {
+            margin: 0;
+            padding: 0;
+        }
+
+        .caret {
+            cursor: pointer;
+            -webkit-user-select: none;
+            /* Safari 3.1+ */
+            -moz-user-select: none;
+            /* Firefox 2+ */
+            -ms-user-select: none;
+            /* IE 10+ */
+            user-select: none;
+        }
+
+        .caret::before {
+            content: "\25B6";
+            color: black;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .caret-down::before {
+
+            transform: rotate(90deg);
+        }
+
+        .nested {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body style="background-color:lavender;">
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'Messenger'));
+    </script>
+
+    <div class="container">
+        <div class="panel-header" style="margin: 10px;">
+
+        </div>
+
+        <div class="row">
+            <br>
+            <div class="col-sm-1 col-md-2 col-1"></div>
+            <div class="col-sm-10 col-md-8 col-10">
+                <% var pos = 0 %>
+                <% array.forEach((item) =>{ %>
+                <% pos++ %>
+                <ul id="<%= item.token %>" class="delivery <%= pos %>" onclick="myFunction(this)">
+                    <li><span class="caret">delivery <%= pos %></span>
+                        <ul class="nested">
+                            <li><b>ID: </b><%= item.userID %></li>
+                            <li><b>name: </b><%= item.name %></li>
+                            <li><b>address: </b><%= item.address %></li>
+                            <li><span class="caret">items</span>
+                                <ul class="nested">
+                                    <% item.items.forEach((element) => { %> 
+                                    <li><%= element %></li>
+                                    <% }); %>
+                                </ul>
+                            </li>
+                            <li><b>TIME: </b><%= item.Time %></li>
+                            <li><b>Distance: </b><%= item.distance %> m</li>
+                        </ul>
+                    </li>
+                </ul>
+                <% }); %>
+
+            </div>
+            <div class="col-sm-1 col-md-2 col-1"></div>
+        </div>
+
+        <button class="fullacceptbutton" id="<%= id %>" onclick="accept(this)" >Select delivery item.</button><br>
+        <button class="fullclosebutton" onclick="closewebview()">CLOSE</button>
+        <div class="panel-footer">
+
+        </div>
+    </div>
+
+    <script>
+        var toggler = document.getElementsByClassName("caret");
+        var i;
+
+        for (i = 0; i < toggler.length; i++) {
+            toggler[i].addEventListener("click", function () {
+                this.parentElement.querySelector(".nested").classList.toggle("active");
+                this.classList.toggle("caret-down");
+            });
+        }
+
+        function myFunction(list) {
+            $(".fullacceptbutton").text('accept ' + list.className);
+            // $(".fullacceptbutton").className(list.id);
+            // if (document.getElementById(list.id).classList[1]){
+            //     var classname =document.getElementById(list.id).classList[1];
+            //     console.log(`classname: ${id}`)
+            // }
+            // $(".fullacceptbutton").addClass(list.id);
+            let items = Array.from(document.getElementsByClassName('fullacceptbutton'));
+            items.forEach(item => {
+                console.log(item.className);
+                item.className = 'fullacceptbutton' + ' ' + list.id;
+            });
+            
+            // console.log($(".fullacceptbutton").classList);
+            // $(".fullacceptbutton").classList = $(".fullacceptbutton").classList + ' ' + list.id;
+            // console.log($(".fullacceptbutton").className);
+        }
+
+        function closewebview() {
+            MessengerExtensions.requestCloseBrowser(function success() {
+                // webview closed
+            }, function error(err) {
+                // an error occurred
+            });
+        }
+
+        function accept(array) {
+            if (typeof (array.classList[1])) {
+                console.log(array);
+                var userid = array.id;
+                var token = array.classList[1];
+                var data = {
+                    userid: userid,
+                    token: token
+                };
+                $.ajax({
+                    url: '/b_v_list',
+                    method: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (res) {
+                        console.log('token: ' + token);
+                        console.log('res: ' + res);
+                        document.getElementById(token).style.display = 'none';
+                        // $("#needvol").text('You successfully requested order you want.');
+
+                    },
+                    error: function (error) {
+                        console.log('some error in fetching the intents');
+                    },
+                });
+            } else {
+                alert("select item for order.");
+            }
+
+
+        }
+    </script>
+
+</body>
+
+</html>
