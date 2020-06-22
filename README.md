@@ -1,4 +1,5 @@
 # Localize
+* Please look at the **[Video](https://www.youtube.com/watch?v=6rMSVtZBngA)** that shows a functioning bot..
 ## Inspiration
 The geography of the whole has changed due to **COVID-19**. This has affected people from all stretches of life. Localize was inspired by a real-life incident which happened in the month of May. In India, due to such a large population, the government had to impose strict lockdown across all the states. This led to a major panic everywhere. The major issue was the availability of day to day items and how will people buy them from shops given the conditions of **social distancing**.
 The social-distancing rules were as follows-
@@ -105,3 +106,5 @@ I learnt a lot of new things since it is my first try at messenger bot. I learnt
 * Rolling the bot out publicly for usage.
 * Spreading awareness about the bot so that people start to use it.
 * Adding **private reply** feature after acceptance.
+
+**As of now, the bot hasn't been released publicly. For access and testing the bot, please email me. When the bot gets approved, the link would be made public.**
