@@ -60,11 +60,13 @@ let FB_VERIFY_TOKEN = null;
 crypto.randomBytes(8, (err, buff) => {
     if (err) throw err;
     FB_VERIFY_TOKEN = buff.toString('hex');
-    var j = schedule.scheduleJob('30 18 * * *', function () {
+    var j = schedule.scheduleJob('00 20 * * *', function () {
         console.log('database format!');
         userService.formatdatabase(() => {
-            sessionIds = new Map();
-            usersMap = new Map();
+            // sessionIds = new Map();
+            // usersMap = new Map();
+            usersMap.clear();
+            sessionIds.clear();
 
             console.log("formated database");
         });
