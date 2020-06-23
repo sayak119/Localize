@@ -1,5 +1,5 @@
 # Localize
-* Please look at the **[Video](https://youtu.be/1KUpWVp-H-I)** that shows a functioning bot..
+* Please look at the **[Video](https://youtu.be/-1lEZMz2ngQ)** that shows a functioning bot..
 ## Inspiration
 The geography of the whole has changed due to **COVID-19**. This has affected people from all stretches of life. Localize was inspired by a real-life incident which happened in the month of May. In India, due to such a large population, the government had to impose strict lockdown across all the states. This led to a major panic everywhere. The major issue was the availability of day to day items and how will people buy them from shops given the conditions of **social distancing**.
 The social-distancing rules were as follows-
